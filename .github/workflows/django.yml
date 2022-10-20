@@ -24,6 +24,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo pip install --upgrade pip
+        sudo apt install python3-django
     - name: Run Tests
       run: |
         django-admin —version
