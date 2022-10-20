@@ -24,13 +24,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt update --fix-missing
-        sudo apt install python3-pip
-        sudo apt install python3-venv
-        git clone git://github.com/django/django ~/django-dev
-        cd ~/django-dev
-        python -m venv my_env
-        source my_env/bin/activate
-        pip install -e ~/django-dev
+        sudo apt install python3-django
     - name: Run Tests
       run: |
         sudo apt django-admin —version
