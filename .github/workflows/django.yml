@@ -26,4 +26,5 @@ jobs:
         sudo pip install --upgrade pip
     - name: Run Tests
       run: |
+        django-admin —version
         python back/manage.py test
