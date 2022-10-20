@@ -1,13 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title></title>
-    <link type="image/png" rel="icon" href="assets/image/favicon.PNG">
+    <link type="image/png" rel="icon" href="{% static 'img/favicon.png' %}">
 
     <!-- STYLE'S -->
-    <link href="css/main.css" rel="stylesheet">
+    <link href="{% static '/css/main.css' %}" type="text/css" rel="stylesheet">
 
     <!-- FONT -- JOST -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
