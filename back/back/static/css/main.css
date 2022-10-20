@@ -1,0 +1,58 @@
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Jost', sans-serif;
+    overflow: hidden;
+}
+
+/* NAVIGATION MENU */
+nav{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 6%;
+}
+nav a{
+    width: calc(100% / 3);
+}
+nav button{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-size: 3vh;
+    border: 0;
+    background-color: #dddddd;
+    color: #606060;
+    line-height: 100%;
+}
+nav button.active{
+    color: white;
+    background-color: dodgerblue;
+}
+
+/* CARD */
+.card{
+    border: 2px solid gray;
+    padding: 13px;
+    overflow-y: auto;
+    margin: 2% 10%;
+    width: calc(80% - 30px);
+    height: calc(86% - 30px);
+}
+p.text{
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+.card img{
+    display: block;
+    max-width: 95%;
+    max-height: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* PROFILE */
