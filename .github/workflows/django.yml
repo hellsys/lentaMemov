@@ -27,5 +27,5 @@ jobs:
         sudo apt install python3-django
     - name: Run Tests
       run: |
-        sudo apt django-admin —version
+        django-admin —version
         python back/manage.py test
