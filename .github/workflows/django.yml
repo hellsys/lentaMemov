@@ -23,9 +23,9 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
       run: |
-        sudo update --fix-missing
-        sudo install python3-django
+        sudo apt update --fix-missing
+        sudo apt install python3-django
     - name: Run Tests
       run: |
-        django-admin —version
+        sudo apt django-admin —version
         python back/manage.py test
