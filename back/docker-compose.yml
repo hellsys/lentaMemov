@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: name
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "lenta"
+      POSTGRES_USER: "django_"
+      POSTGRES_PASSWORD: "mS54Z%55JNs1B4Z5xUxY3JIL@nYz"
+    ports:
+      - "5432:5432/tcp"
+      - "5432:5432/udp"
+
+  server:
+    build: server/
+    command: python manage.py runserver 0.0.0.0:8000
+    ports: 
+      - "127.0.0.1:8000:8000/tcp"
+      - "127.0.0.1:8000:8000/udp"
+    depends_on:
+      - postgres

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class RiddlesConfig(AppConfig):
+class MainConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'riddles'
+    name = 'main'
