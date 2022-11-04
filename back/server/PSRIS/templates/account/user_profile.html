@@ -1,8 +1,28 @@
 {% extends "base.html" %}
-
-{% block title %}Profile{% endblock %}
-
+{% load crispy_forms_tags %}
+{% block title %}Профиль{% endblock %}
 {% block content %}
-    <h1>Your profile</h1>
-    <p>Welcome to your profile.</p>
-{% endblock %}
+
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" height=200 width=200>
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <span class="text-hidden">{{ user.email }}</span>
+        </div>
+      </div>
+      
+
+        
+   	<form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Ваш профиль</legend>
+      </fieldset>
+  </form>
+  <button class="btn btn-outline-info" onclick="location.href='/account/edit'">Изменить</button>
+  
+
+
+    </div>
+{% endblock content %}
