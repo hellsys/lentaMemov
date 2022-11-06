@@ -36,6 +36,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'extra_views',
+    'lenta',
     'account',
     'main',
     'django.contrib.admin',
@@ -84,7 +86,7 @@ WSGI_APPLICATION = 'PSRIS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'lenta2',
+        'NAME': 'lenta',
         'USER': 'django_',
         'PASSWORD': 'mS54Z%55JNs1B4Z5xUxY3JIL@nYz',
         'HOST': 'localhost',

@@ -10,12 +10,25 @@ from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .models import Profile
 
+from lenta.models import Post, PostImage
+from lenta.forms import PostForm, ImageForm
+from django.contrib.auth.models import User
+
+
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
+
 @login_required
 def profile(request):
     return render(request, 'account/user_profile.html')
 
 @login_required
-def profile_edit(request):    
+def profile_edit(request, **kwargs):    
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
@@ -25,7 +38,7 @@ def profile_edit(request):
             u_form.save()
             p_form.save()
             messages.success(request, f'Ваш профиль успешно обновлен.')
-            return redirect('/account')
+            return redirect(f'/account/{request.user.username}')
 
     else:
         u_form = UserUpdateForm(instance=request.user)
@@ -37,6 +50,28 @@ def profile_edit(request):
     }
 
     return render(request, 'account/edit_profile.html', context)
+
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'account/user_profile.html'
+    context_object_name = 'posts'
+    paginate_by = 5
+
+    def get_context_data(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        posts_ = Post.objects.filter(author=user).order_by('-date_posted')  
+        images = [PostImage.objects.filter(post_id=i.id) for i in posts_]
+        context={
+            'posts' : posts_,
+            'images_list' : images,
+            'count' : len(posts_)
+
+        }
+        print(posts_)
+        return context 
+
+
+
 
 
 def register(request):
@@ -58,3 +93,4 @@ def register(request):
 def logout_view(request):
     logout(request)
     return redirect('%s'%(request.past))
+

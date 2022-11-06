@@ -6,7 +6,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('logout-then-login/', logout_then_login, name='logout-then-login'),
     path('register/', views.register, name='register'),
-    path('',views.profile, name = 'user_profile'),
-    path('edit/',views.profile_edit, name = 'edit_profile'),
+    path('edit/<str:username>',views.profile_edit, name = 'edit_profile'),
+    path('<str:username>', views.UserPostListView.as_view(), name = 'user_profile'),
+    
 
         ]

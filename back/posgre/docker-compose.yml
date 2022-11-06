@@ -4,7 +4,7 @@ services:
 
     image: postgres:13.3
     environment:
-      POSTGRES_DB: "lenta2"
+      POSTGRES_DB: "lenta"
       POSTGRES_USER: "django_"
       POSTGRES_PASSWORD: "mS54Z%55JNs1B4Z5xUxY3JIL@nYz"
     restart: always

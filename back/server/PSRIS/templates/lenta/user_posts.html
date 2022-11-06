@@ -1,6 +1,4 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
-{% block title %}Профиль{% endblock %}
 {% block content %}
 
     <div class="content-section">
@@ -11,14 +9,6 @@
           <span class="text-hidden">{{ user.email }}</span>
         </div>
       </div>
-      
-
-        
-   	<form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-
-  </form>
-  <button class="btn btn-outline-info" onclick="location.href='/account/edit/{{user.username}}'">Изменить</button>
     </div>
 
     {% for post in posts %}
@@ -26,7 +16,6 @@
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              
               <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
             </div>
 
@@ -42,10 +31,7 @@
 
             {% endfor %}
             {% endfor %}
-            <div>
-              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Редактировать</a>
-              <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Удалить</a>
-            </div>
+
 
           </div>
         </article>
