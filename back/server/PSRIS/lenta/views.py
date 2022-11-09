@@ -39,6 +39,7 @@ def createPost(request):
             for i in images:
                 print('olo')
                 PostImage.objects.create(post=post_inst, image=i)
+            return redirect(f'/account/{request.user.username}')
                     
 
     context = {'form': form, 'form2': form2}
@@ -72,13 +73,16 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    success_url = '/'
 
     def test_func(self):
         post = self.get_object()
         if self.request.user == post.author:
             return True
         return False
+    
+    def get_success_url(self):
+
+        return f'/account/{self.request.user.username}'
 
 
 
