@@ -10,13 +10,13 @@ from django.views.generic import (
 from .models import Post, PostImage
 from .forms import PostForm, ImageForm
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 def lenta(request):
-    post_ = Post.objects.order_by("?").first()
+    post_ = Post.objects.filter(~Q(author_id=request.user)).order_by("?").first()
     images = PostImage.objects.filter(post_id=post_.id)
     context = {'object': post_,
                 'images': images}
-    print(images)
     return render(request, 'lenta/lenta.html', context)
 
 def createPost(request):

@@ -1,20 +1,21 @@
 version: "3.9"
 services:
   postgres:
-
-    image: postgres:13.3
+    image: postgres
     environment:
       POSTGRES_DB: "lenta"
-      POSTGRES_USER: "django_"
-      POSTGRES_PASSWORD: "mS54Z%55JNs1B4Z5xUxY3JIL@nYz"
+      POSTGRES_USER: "lenta"
+      POSTGRES_PASSWORD: "lenta"
     restart: always
     ports:
       - "5432:5432/tcp"
       - "5432:5432/udp"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+    
+    volumes: 
+      - pgdata1:/var/lib/postgresql/data
 
-volumes: 
-  pgdata:
+volumes:
+  pgdata1:
+
 
 
