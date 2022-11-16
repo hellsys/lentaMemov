@@ -8,8 +8,8 @@ services:
       POSTGRES_PASSWORD: "lenta"
     restart: always
     ports:
-      - "5432:5432/tcp"
-      - "5432:5432/udp"
+      - "5431:5432/tcp"
+      - "5431:5432/udp"
     
     volumes: 
       - pgdata1:/var/lib/postgresql/data

@@ -1,16 +1,27 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+    <style>
+        .hidden {
+            display: none
+        }
+    </style>
     <div class="content-section">
         <form method="POST" data-ajax="false" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Изменить запись</legend>
-                {{form| crispy}}
+                {{ t_form| crispy }}
+                {{ f_i.management_form }}
                 
+                {% for f in f_i %}
+                    {{ f|crispy }}
+
+                {% endfor %}
+
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit" href="javascript:history.go(-1)">Сохранить</button>
+                <button class="btn btn-outline-info" type="submit">Сохранить</button>
             </div>
         </form>
     </div>

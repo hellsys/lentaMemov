@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'lenta',
     'account',
     'main',
+    'django.forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -90,12 +91,14 @@ DATABASES = {
         'USER': 'lenta',
         'PASSWORD': 'lenta',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '5431',
     }
 }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
