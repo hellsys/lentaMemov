@@ -12,7 +12,7 @@ services:
       - "5431:5432/udp"
     
     volumes: 
-      - pgdata1:/var/lib/postgresql/data
+      - ./pgdata1:/var/lib/postgresql/data
 
 volumes:
   pgdata1:
