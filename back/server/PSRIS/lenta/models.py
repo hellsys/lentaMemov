@@ -11,6 +11,8 @@ class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    likes = models.ManyToManyField(User, related_name='lenta_post')
+    seen = models.ManyToManyField(User, related_name='lenta_posts_seen')
 
     def __str__(self):
         return self.title
@@ -32,7 +34,6 @@ class PostImage(models.Model):
                               blank=True,
                               )
 
-
     def save(self, *args, **kwargs):
         super(PostImage, self).save(*args, **kwargs)
 
@@ -42,3 +43,12 @@ class PostImage(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+
+# class Like(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+#                              related_name='likes',
+#                              on_delete=models.CASCADE)
+#     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+#     object_id = models.PositiveIntegerField()
+#     content_object = GenericForeignKey('content_type', 'object_id')

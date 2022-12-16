@@ -12,12 +12,18 @@ from .forms import PostForm, ImageForm, MyClearableFileInput
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.forms import modelformset_factory
+from jopa.dvs_rec import dvs_model
+
+root = 'jopa/DVS and VVRIS/time data and backups/'
+
+model = dvs_model(root + 'matrix small.npz')
 
 
 def lenta(request):
     post_ = Post.objects.filter(~Q(author_id=request.user)).order_by("?").first()
+
     images = PostImage.objects.filter(post_id=post_.id)
-    print(images)
+    post_.seen.add(request.user)
     context = {'object': post_,
                'images': images}
     return render(request, 'lenta/lenta.html', context)
@@ -156,3 +162,15 @@ class UserPostListView(ListView):
 
         }
         return context
+
+def like_view(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.likes.add(request.user)
+    author = post.author_id
+    user_ = request.user.id
+    dict = {'user':user_, 'pub': author}
+    model.add_interaction(dict)
+    return redirect('/lenta/')
+
+def skip_view(request):
+    return redirect('/lenta/')

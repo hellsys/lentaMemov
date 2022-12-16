@@ -1,2 +1,6 @@
 /back/.idea
 /.idea
+/.fleet
+/back/postgre/pgdata1
+/back/server/PSRIS/media/post_pics
+/back/server/PSRIS/media/profile_pics
