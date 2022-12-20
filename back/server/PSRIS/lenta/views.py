@@ -174,3 +174,5 @@ def like_view(request, pk):
 
 def skip_view(request):
     return redirect('/lenta/')
+
+    

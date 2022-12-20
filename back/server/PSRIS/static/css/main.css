@@ -1,6 +1,6 @@
 body,
 html {
- width:100%;
+ width:100% !important;
  height:100%
 }
 
@@ -115,4 +115,8 @@ footer a{
 footer a:hover {
   color:#777;
   text-decoration: none;
+}
+
+.aboba {
+  width : 150px;
 }
