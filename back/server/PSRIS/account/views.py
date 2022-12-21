@@ -23,6 +23,17 @@ from django.views.generic import (
     DeleteView
 )
 
+from lenta.views import model
+
+model.get_shape()
+
+# from jopa.dvs_rec import dvs_model
+
+# root = 'jopa/DVS and VVRIS/time data and backups/'
+
+# model = dvs_model(root + 'cutted_m.npz')
+# model.get_shape()
+
 @login_required
 def profile(request):
     return render(request, 'account/user_profile.html')
@@ -78,12 +89,19 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            
+            model.get_shape()
+            #!!!!!!!!!!!!!!!
+            model.add_rc()
+            #!!!!!!!!!!!!!!!
+            model.save_state()
             user = form.save()
             username = form.cleaned_data.get('username')
-            user.save()
             profile = Profile()
             profile.user = user
             profile.save()
+            user.save()
+
             messages.success(request, f'Ваш аккаунт создан: можно войти на сайт.')
             return redirect('login')
     else:

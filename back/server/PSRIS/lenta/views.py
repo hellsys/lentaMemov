@@ -12,16 +12,30 @@ from .forms import PostForm, ImageForm, MyClearableFileInput
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.forms import modelformset_factory
-from jopa.dvs_rec import dvs_model
+from model.dvs_rec import dvs_model
+import random
 
-root = 'jopa/DVS and VVRIS/time data and backups/'
+root = 'model/data/'
 
-model = dvs_model(root + 'matrix small.npz')
+model = dvs_model(root + 'cutted_m.npz')
+shape = model.get_shape()
+print(shape)
+last_id = User.objects.order_by("id").values_list("id", flat=True).last()
+while last_id > model.get_shape()[1] - 1:
+    model.add_rc()
+print(last_id)
 
 
 def lenta(request):
-    post_ = Post.objects.filter(~Q(author_id=request.user)).order_by("?").first()
-
+    # post_ = Post.objects.filter(~Q(author_id=request.user)).order_by("?").first()
+    recs = model.get_recommendations(request.user.id)
+    print(recs)
+    cur_author = recs[random.randint(0, len(recs) - 1)]
+    print(cur_author)
+    post_ = Post.objects.filter(author_id=cur_author).order_by("?").first()
+    while post_ is None:
+        cur_author = recs[random.randint(0, len(recs) - 1)]
+        post_ = Post.objects.filter(author_id=cur_author).order_by("?").first()
     images = PostImage.objects.filter(post_id=post_.id)
     post_.seen.add(request.user)
     context = {'object': post_,
@@ -168,11 +182,17 @@ def like_view(request, pk):
     post.likes.add(request.user)
     author = post.author_id
     user_ = request.user.id
-    dict = {'user':user_, 'pub': author}
-    model.add_interaction(dict)
+    dict = {'user':user_-1+11589, 'pub': author-1}
+
+#!!!!!!!!!!!!!!!!!!
+
+    model.add_interation(dict)
+    model.calculate_similar(user=user_+11588)
+    model.calculate_similar(pub=author-1)
+
+#!!!!!!!!!!!!!!!!!!
+
     return redirect('/lenta/')
 
 def skip_view(request):
     return redirect('/lenta/')
-
-    
