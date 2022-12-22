@@ -1,7 +1,5 @@
 /back/.idea/
 /.idea/
 /.fleet/
-/back/posgre/pgdata1/
-/back/server/PSRIS/media/
 __pycache__/
 .DS_Store
